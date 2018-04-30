@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using CaptureTheFlat.Helpers;
 using CaptureTheFlat.Models;
 using CaptureTheFlat.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -36,12 +35,6 @@ namespace CaptureTheFlat.Controllers
 
             IEnumerable<Post> postsWithDateBefore = Posts.Where(x => x.PublishDate >= minDate);
             return Ok(postsWithDateBefore);
-        }
-
-        [HttpGet("NoCache")]
-        public IActionResult Cache()
-        {
-            return Ok(_postRepository.GetAllPostsWithoutCache());
         }
     }
 }

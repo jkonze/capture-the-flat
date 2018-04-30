@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using CaptureTheFlat.Helpers;
 using CaptureTheFlat.Models;
 using HtmlAgilityPack;
-using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.Configuration;
 
 namespace CaptureTheFlat.Repositories
@@ -52,11 +50,6 @@ namespace CaptureTheFlat.Repositories
 
                 return posts;
             }
-        }
-
-        public override IEnumerable<Post> GetAllPostsWithoutCache()
-        {
-            return Posts;
         }
 
         public override void Migrate()
