@@ -31,6 +31,7 @@ namespace CaptureTheFlat.Controllers
         [HttpGet("days={days}")]
         public IActionResult GetByDaysBack(int days)
         {
+
             DateTime minDate = DateTime.Now.AddDays(-days);
 
             IEnumerable<Post> postsWithDateBefore = Posts.Where(x => x.PublishDate >= minDate);

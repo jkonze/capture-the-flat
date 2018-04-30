@@ -1,10 +1,12 @@
 ﻿using CaptureTheFlat.Helpers;
 using CaptureTheFlat.Repositories;
+using FluentScheduler;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
 
 namespace CaptureTheFlat
 {
@@ -13,16 +15,18 @@ namespace CaptureTheFlat
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+            JobManager.Initialize(new JobRegistry());
         }
 
-        public IConfiguration Configuration { get; }
+
+        private IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<APIContext>(options =>
-                options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
-
+                options.UseMySql(connectionString));
 
             services.AddSingleton<IPostRepository, PostRepository>();
 

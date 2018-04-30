@@ -8,6 +8,8 @@ services:
     image: capturetheflat
     links: 
       - "db:database"
+      - "redis:redis"
+      
     ports: 
       - "1337:80"
   db:
@@ -16,3 +18,7 @@ services:
     environment: 
       MYSQL_ROOT_PASSWORD: root
     image: mariadb
+  redis:
+    ports:
+      - "6379"
+    image: redis
